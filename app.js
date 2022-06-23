@@ -31,47 +31,47 @@ app.locals.moment = require('moment');
 //TODO: Need proper error handling when there are issues with API
 
 //Socket io
-const http = require('http').createServer(app);
+// const http = require('http').createServer(app);
 
-//Air Quality real-time data
-const airQuality = require('./models/airboxes');
+// //Air Quality real-time data
+// const airQuality = require('./models/airboxes');
 
-/* Generate real time air quality data by socket.io */
-http.listen(port, () => console.log(`Listening on ${port}`));
+// /* Generate real time air quality data by socket.io */
+// http.listen(port, () => console.log(`Listening on ${port}`));
 
-airQuality.abJson.then(()=> {
+// airQuality.abJson.then(()=> {
 
-  console.log('awaited');
-  //Manage connections
-  io.sockets.on('connection', function(socket) {
+//   console.log('awaited');
+//   //Manage connections
+//   io.sockets.on('connection', function(socket) {
 
-      var intervals = 1500;
-      var timeoutId = -1;
+//       var intervals = 1500;
+//       var timeoutId = -1;
 
-      /**
-       * Handle "disconnect" events.
-       */
-      var handleDisconnect = function() {
-          console.log('handle disconnect');
-          clearTimeout(timeoutId);
-      };
+//       /**
+//        * Handle "disconnect" events.
+//        */
+//       var handleDisconnect = function() {
+//           console.log('handle disconnect');
+//           clearTimeout(timeoutId);
+//       };
 
-      //Generate a request to be sent to the client.
+//       //Generate a request to be sent to the client.
        
-      var generateServerRequest = function() {
-          console.log('generate server request');
-          socket.emit('server request', {
-          data: airQuality.airboxes, 
-          status: airQuality.dataLoaded
-          });
-          timeoutId = setTimeout(generateServerRequest, intervals);
-      };
+//       var generateServerRequest = function() {
+//           console.log('generate server request');
+//           socket.emit('server request', {
+//           data: airQuality.airboxes, 
+//           status: airQuality.dataLoaded
+//           });
+//           timeoutId = setTimeout(generateServerRequest, intervals);
+//       };
 
-      socket.on('disconnect', handleDisconnect);
+//       socket.on('disconnect', handleDisconnect);
 
-      timeoutId = setTimeout(generateServerRequest, intervals);
-  });
-});
+//       timeoutId = setTimeout(generateServerRequest, intervals);
+//   });
+// });
 
 
 // Routers
