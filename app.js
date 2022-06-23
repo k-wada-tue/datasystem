@@ -19,13 +19,17 @@ InitiateMongoServer();
 
 // Set port
 const port = process.env.PORT || 3000;
-
+const host = '0.0.0.0';
 // Create an application
 const app = express();
 
 //Enables to use moment.js in templates
 app.locals.moment = require('moment');
 
+
+app.listen(port, host, function() {
+  console.log("Server started.......");
+});
 
 //TODO: move this block of code related to real-time data to different files
 //TODO: Need proper error handling when there are issues with API
