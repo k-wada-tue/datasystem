@@ -18,7 +18,7 @@ const InitiateMongoServer = require("./config/db");
 InitiateMongoServer();
 
 // Set port
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 // Create an application
 const app = express();
